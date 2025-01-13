@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  web:
+  
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    container_name: loginapp
+    volumes:
+      - .:/loginapp
+    ports:
+      - "8000:8000"
+   
+    depends_on:
+      - dblogin
+    
+  dblogin:
+    platform: linux/amd64
+    container_name: dblogin
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=student
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=vaibhavi
+    ports:
+      - "5433:5432"
+
