@@ -84,6 +84,43 @@
 			"name": "login",
 			"item": [
 				{
+					"name": "CRUD user",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "update user",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "delete user",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "get users",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "login",
 					"request": {
 						"method": "POST",
@@ -142,14 +179,6 @@
 				},
 				{
 					"name": "refresh token",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				},
-				{
-					"name": "register",
 					"request": {
 						"method": "GET",
 						"header": []
