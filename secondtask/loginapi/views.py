@@ -13,50 +13,87 @@ from django.core.cache import cache
 # Create your views here.
 class registerAPI(APIView):
     
-    def get(self,request):
+    def get(self,request,id=None):
+        if id:
+            users = cache.get(f'getuser{id}')
+            if users:
+                print('from cache')
+            else:
+                print('from db')
+                getid=User.objects.get(id=id)
+            # user_queryset = User.objects.all()
+                serialusers = registerSerializer(getid).data  
+
+            
+                cache.set(f'getuser{id}', serialusers, timeout=60)
+                users = serialusers
+
+            return Response(users)
+        #no id then return list
         users = cache.get('userList')
         if users:
-            print('from cache')
+                print('from cache')
         else:
-            print('from db')
-           
-            user_queryset = User.objects.all()
-            serialusers = registerSerializer(user_queryset, many=True).data  # Serialize data
+                print('from db')
+                
+                user_queryset = User.objects.all()
+                serialusers = registerSerializer(user_queryset,many=True).data  
 
-           
-            cache.set('userList', serialusers, timeout=60)
-            users = serialusers
+            
+                cache.set('userList', serialusers, timeout=60)
+                users = serialusers
 
         return Response(users)
+        
     def post(self,request):
         data=request.data
         serialuser=registerSerializer(data=data)
         if serialuser.is_valid():
-            newUser=serialuser.save()
-            cache.set(f"user{newUser.id}",newUser,timeout=60)
-            cache.delete("userList")
+            serialuser.save()
+            users = cache.get('userList')
+            users.append(serialuser.data)
+            cache.set('userList', users)
             return Response(serialuser.data)
         return Response(serialuser.errors)
     
             
-    def put(self,request):
+    def put(self,request,id):
         data=request.data
-        getid=User.objects.get(id=data['id'])
-        
+        getid=User.objects.get(id=id)
         serialusers=registerSerializer(getid,data=data)
         if serialusers.is_valid():
             updatedUser=serialusers.save()
-            cache.set(f"user{updatedUser.id}",updatedUser,timeout=60)
-            cache.delete("userList")
+
+            serialupdateduser = registerSerializer(updatedUser).data
+            #check for the user in cache
+            
+            users = cache.get('userList')
+            for index, user_data in enumerate(users):
+                if user_data['id'] == id:
+                    users[index] = registerSerializer(updatedUser).data
+                    cache.set('userList', users,timeout=60)
+           
+            
             return Response(serialusers.data)
+       
         return Response(serialusers.errors)
+        
+        # if serialusers.is_valid():
+        #     updatedUser=serialusers.save()
+        #     cache.set(f"user{updatedUser.id}",updatedUser,timeout=60)
+        #     cache.delete("userList")
+        #     return Response(serialusers.data)
+        # return Response(serialusers.errors)
     
-    def delete(self,request):
-        data=request.data
-        getid=User.objects.get(id=data['id'])
+    def delete(self,request,id):
+        
+        getid=User.objects.get(id=id)
         getid.delete()
-        cache.delete(f"user{getid.id}")
-        cache.delete("userList")
+        users = cache.get('userList')
+        for index, user_data in enumerate(users):
+            if user_data['id'] == id:
+                del users[index]
+                cache.set('userList', users,timeout=60)
         return Response({'message':'User deleted'})
 
         

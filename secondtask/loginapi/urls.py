@@ -16,8 +16,8 @@ urlpatterns = [
     path('api/auth/helloworld1/', helloworld1.as_view(), name='helloworld1'),
     path('api/auth/helloworld2/', helloworld2.as_view(), name='helloworld2'),
     path('api/auth/refreshapi/', refreshTokenAPI.as_view(), name='refreshTokenAPI'),
+    path('api/auth/register/<int:id>', registerAPI.as_view(), name='registerAPI'),
     path('api/auth/register/', registerAPI.as_view(), name='registerAPI'),
-   
 
     
 ]
