@@ -9,10 +9,11 @@ class registerSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
             user=User.objects.create_user(
-                
+               
                 username= validated_data['username'],
                 email=validated_data['email'],
-                password=validated_data['password']
+                password=validated_data['password'],
+                # contactNo=validated_data['contactNo']
 
             )
             return user
@@ -20,3 +21,7 @@ class registerSerializer(serializers.ModelSerializer):
 class loginSerializer(serializers.Serializer):
     username=serializers.CharField()
     password=serializers.CharField()
+
+class customerSerializer(serializers.Serializer):
+     email=serializers.EmailField()
+     contactNo=serializers.CharField()

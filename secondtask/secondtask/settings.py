@@ -190,3 +190,6 @@ CACHES = {
         }
     }
 }
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
+]

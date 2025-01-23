@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/auth/refreshapi/', refreshTokenAPI.as_view(), name='refreshTokenAPI'),
     path('api/auth/register/<int:id>', registerAPI.as_view(), name='registerAPI'),
     path('api/auth/register/', registerAPI.as_view(), name='registerAPI'),
+    path('api/auth/validate/', emailandPhone.as_view(), name='emailandPhone'),
 
     
 ]
