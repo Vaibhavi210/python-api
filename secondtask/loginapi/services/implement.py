@@ -1,15 +1,16 @@
 from .base import *
 from .validation_service import validate
 from rest_framework.response import Response
-class emailImplement(baseClass):
-    def abstractMethod(self,email):
+class emailandPhoneImplement(baseClass):
+    def validationForEmail(self,email):
         validate.validateEmail(email)
         print("your email is validated")
-        
-
-class contactImplement(baseClass):
-    def abstractMethod(self,contactNo):
+    def validationForPhone(self,contactNo):
         validate.validatePhoneNo(contactNo)
         print("your phone number  is validated")
+        
+
+# class contactImplement(baseClass):
+   
 
     

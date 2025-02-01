@@ -4,12 +4,13 @@ services:
   web:
   
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000 & FLASK_APP=flask-api/app.py flask run --host=0.0.0.0 --port=5000"
     container_name: loginapp
     volumes:
       - .:/loginapp
     ports:
       - "8000:8000"
+      - "5000:5000"
    
     depends_on:
       - dblogin

@@ -2,5 +2,9 @@ from abc import ABC, abstractmethod
 
 class baseClass(ABC):
     @abstractmethod
-    def abstractMethod(self):
+    def validationForEmail(self):
         pass
+    @abstractmethod
+    def validationForPhone(self):
+        pass
+   

@@ -10,6 +10,10 @@ from .services.implement import *
 from enum import Enum
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.decorators import api_view
+import requests
+from rest_framework.exceptions import ValidationError
+from .services.validation_service import *
 
 
 class errorCodes(Enum):
@@ -162,22 +166,145 @@ class refreshTokenAPI(APIView):
         
 class emailandPhone(APIView):
     def post(self,request):
+        
         data=request.data
         serialdata=customerSerializer(data=data)
-        if serialdata.is_valid():
-            try:
+      
+        try:
+            if serialdata.is_valid():
                 email=serialdata.validated_data['email']
-                email_implement = emailImplement()
-                email_implement.abstractMethod(email)
-                contactNo=serialdata.validated_data['contactNo']
+                email_implement = emailandPhoneImplement()
+                email_implement.validationForEmail(email)
+        except ValidationError as ve:
+            return Response({'error':str(ve)},status=status.HTTP_406_NOT_ACCEPTABLE)
+        try:
+            contactNo=serialdata.validated_data['contactNo']
+                    
+            contact_implement=emailandPhoneImplement()
+            contact_implement.validationForPhone(contactNo)
+        except ValidationError as ve:
+            return Response({'error':str(ve)},status=status.HTTP_406_NOT_ACCEPTABLE)
+             
                 
-                contact_implement=contactImplement()
-                contact_implement.abstractMethod(contactNo)
-                return Response("your email & phone number is validated")
-            except Exception as e:
-                 return Response({"error": errorCodes.contactError.value,
-                    "details": str(e)},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as e:
+                    return Response(serialdata.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("Your email & phone number are validated successfully")  
+    
+            
+            
+@api_view(['GET','POST'])
+def success(request):
+     url="http://127.0.0.1:5000/"
+     if request.method=='GET':
+          response=requests.get(url+"success")
+     elif  request.method=='POST':
+               data=request.data
+               response=requests.post(url+"post/success",json=data)
+     return Response(response.json(), status=response.status_code) 
+
+@api_view(['GET'])
+def frobidden(request):
+     url="http://127.0.0.1:5000/"
+     
+     response=requests.get(url+"forbidden")
+     return Response(response.json(), status=response.status_code)
+
+@api_view(['POST'])
+def badrequest(request):
+     data=request.data
+     url="http://127.0.0.1:5000/"
+     
+     response=requests.post(url+"badrequest",json=data)
+     return Response(response.json(), status=response.status_code)
+
+@api_view(['POST'])
+def snapchat(request,ad_account_id):
+     data=request.data
+     url=f"http://127.0.0.1:5000/v1/adaccounts/{ad_account_id}s/segments"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+@api_view(['POST'])
+def tiktok(request):
+     data=request.data
+     url="http://127.0.0.1:5000/open_api/v1.3/custom_audience/create/"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+@api_view(['POST'])
+def reddit(request,ad_account_id):
+     data=request.data
+     url=f"http://127.0.0.1:5000/api/v3/ad_accounts/{ad_account_id}/custom_audiences"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+
+@api_view(['POST'])
+def amazon(request):
+     data=request.data
+     url="http://127.0.0.1:5000/v2/dp/audiencemetadata/"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+
+@api_view(['POST'])
+def yahoo(request):
+     data=request.data
+     url="http://127.0.0.1:5000/traffic/audiences/email_address/"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+
+@api_view(['POST'])
+def meta(request,AD_ACCOUNT_ID):
+     data=request.data
+     url=f"http://127.0.0.1:5000/v18.0/{AD_ACCOUNT_ID}/customaudiences"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+
+
+@api_view(['POST'])
+def linkedin(request,adAccountId):
+     data=request.data
+     url=f"http://127.0.0.1:5000/v2/adAccounts/{adAccountId}/audiences"
+     
+     response=requests.post(url,json=data)
+     return Response(response.json(), status=response.status_code)
+
+
+class emailandPhoneusingPydentic(APIView):
+    def post(self,request):
+        try:
+            data=request.data
+            serialdata=customerSerializer(data=data)
+            if serialdata.is_valid():
+                validate_data=validInput(email=serialdata.data['email'],contactNo=serialdata.data['contactNo'])
+                return Response(validate_data)
+        except Exception as e:
+                    return Response({'msg':str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serialdata.errors)
+
+class phoneValidation(APIView):
+     @validPhone
+     def post(self,request):
+          data=request.data 
+          serialdata=customerSerializer(data=data)
+          if serialdata.is_valid():
+               return Response(serialdata.data)
+          return Response(serialdata.errors)
+               
+
+
+
+   
+     
        
         
 
