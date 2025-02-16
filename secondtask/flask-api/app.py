@@ -41,8 +41,8 @@ def badrequestFromPost():
     # message=[{'message':'bad request'}]
      return jsonify({'error': 'Bad Request'}), 400
 
-@app.route('/v1/adaccounts/<ad_account_id>/segments',methods=['POST'])
-def scSegments(ad_account_id):
+@app.route('/v1/adaccounts/ad_account_id/segments',methods=['POST'])
+def scSegments():
      request_data = request.get_json()
      message = {
           "request_status": "success",
@@ -55,7 +55,7 @@ def scSegments(ad_account_id):
                          "created_at": "2016-08-12T22:59:42.405Z",
                          "name": "all the sams in the world",
                          "id": "5677923948298240",
-                         "ad_account_id": ad_account_id,
+                         "ad_account_id": "8adc3db7-8148-4fbf-999c-8d2266369d74",
                          "description": "all the sams in the world",
                          "status": "PENDING",
                          "source_type": "FIRST_PARTY",
