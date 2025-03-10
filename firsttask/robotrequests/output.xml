@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2025-03-10T12:54:03.465470" rpa="false" schemaversion="5">
+<suite id="s1" name="testForGet" source="C:\Users\Vaibhavi\OneDrive\Desktop\my projects\dev\internship\firsttask\robotrequests\tests\testForGet.robot">
+<test id="s1-t1" name="Register subject" line="10">
+<kw name="Register subject" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:03.783366" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:03.783211" elapsed="0.000311"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.783829" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.783633" elapsed="0.000215"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.784047" level="INFO">${data} = {'subjectname': 'Hindi'}</msg>
+<var>${data}</var>
+<arg>subjectname=${subjectname}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.783920" elapsed="0.000142"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:03.842128" level="INFO">POST Request : url=http://127.0.0.1:8000/crudsubject/ 
+ path_url=/crudsubject/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '24'} 
+ body=b'{"subjectname": "Hindi"}' 
+ </msg>
+<msg time="2025-03-10T12:54:03.842285" level="INFO">POST Response : url=http://127.0.0.1:8000/crudsubject/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:03 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'GET, POST, PATCH, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '65', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"subjectname":["subject with this subjectname already exists."]} 
+ </msg>
+<msg time="2025-03-10T12:54:03.842392" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${forSubject}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.784124" elapsed="0.058288"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Status Code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.842549" elapsed="0.000651"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Body: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.843376" elapsed="0.000581"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:03.844041" elapsed="0.000071"/>
+</return>
+<msg time="2025-03-10T12:54:03.844324" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>Hindi</arg>
+<status status="PASS" start="2025-03-10T12:54:03.782367" elapsed="0.061986"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.844860" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.844542" elapsed="0.000360"/>
+</kw>
+<doc>Register a subject</doc>
+<status status="PASS" start="2025-03-10T12:54:03.781430" elapsed="0.063659"/>
+</test>
+<test id="s1-t2" name="Register student" line="14">
+<kw name="Register student" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.846564" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.846409" elapsed="0.000181"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.846833" level="INFO">${subject_list} = ['2']</msg>
+<var>${subject_list}</var>
+<arg>${subject_id}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.846701" elapsed="0.000155"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.847149" level="INFO">${data} = {'name': 'heer', 'email': 'heer@gmail.com', 'profession': 'student', 'subject_id': ['2']}</msg>
+<var>${data}</var>
+<arg>name=${name}</arg>
+<arg>email=${email}</arg>
+<arg>profession=${profession}</arg>
+<arg>subject_id=${subject_list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.846958" elapsed="0.000208"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Sending Data: ${data}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.847239" elapsed="0.000263"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:03.912445" level="INFO">POST Request : url=http://127.0.0.1:8000//createuser/ 
+ path_url=//createuser/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "heer", "email": "heer@gmail.com", "profession": "student", "subject_id": ["2"]}' 
+ </msg>
+<msg time="2025-03-10T12:54:03.912554" level="INFO">POST Response : url=http://127.0.0.1:8000//createuser/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:03 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'POST, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '97', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"data":{"id":12,"name":"heer","email":"heer@gmail.com","profession":"student","subject_id":[2]}} 
+ </msg>
+<msg time="2025-03-10T12:54:03.912685" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/createuser/</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.847594" elapsed="0.065122"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.912908" elapsed="0.000969"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.914479" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<arg>User creation failed!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.914039" elapsed="0.000496"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:03.914584" elapsed="0.000042"/>
+</return>
+<msg time="2025-03-10T12:54:03.914758" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>heer</arg>
+<arg>heer@gmail.com</arg>
+<arg>student</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:03.846090" elapsed="0.068805"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.915488" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.915150" elapsed="0.000387"/>
+</kw>
+<kw name="Validate Student" owner="keywords">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2025-03-10T12:54:03.916195" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2025-03-10T12:54:03.916265" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2025-03-10T12:54:03.925946" level="INFO">Connect to DB using : psycopg2.connect(database='student', user='postgres', password=***, host='localhost', port=5432)</msg>
+<arg>psycopg2</arg>
+<arg>${DBName}</arg>
+<arg>${DBUser}</arg>
+<arg>${DBPass}</arg>
+<arg>${DBHost}</arg>
+<arg>${DBPort}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.915982" elapsed="0.056484"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2025-03-10T12:54:03.972946" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT * FROM helloapi_user WHERE email='heer@gmail.com'&lt;/code&gt;</msg>
+<msg time="2025-03-10T12:54:03.976247" level="INFO">Commit the transaction</msg>
+<msg time="2025-03-10T12:54:03.976497" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;name&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;email&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;profession&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;12&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;heer&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;heer@gmail.com&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;student&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2025-03-10T12:54:03.976619" level="INFO">${query_result} = [(12, 'heer', 'heer@gmail.com', 'student')]</msg>
+<var>${query_result}</var>
+<arg>SELECT * FROM helloapi_user WHERE email='${email}'</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.972726" elapsed="0.003912"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${query_result} == []</arg>
+<arg>Fail</arg>
+<arg>No student record found in the database.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.976774" elapsed="0.000182"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Query Result: ${query_result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.977035" elapsed="0.000334"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.977873" level="INFO">${db_id} = 12</msg>
+<msg time="2025-03-10T12:54:03.977900" level="INFO">${db_name} = heer</msg>
+<msg time="2025-03-10T12:54:03.977923" level="INFO">${db_email} = heer@gmail.com</msg>
+<msg time="2025-03-10T12:54:03.977944" level="INFO">${db_profession} = student</msg>
+<var>${db_id}</var>
+<var>${db_name}</var>
+<var>${db_email}</var>
+<var>${db_profession}</var>
+<arg>${query_result[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.977468" elapsed="0.000489"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.978137" level="INFO">Length is 1.</msg>
+<arg>${query_result}</arg>
+<arg>Student registration failed, no data in the database.</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.978039" elapsed="0.000129"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_name}</arg>
+<arg>${name}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.978230" elapsed="0.000103"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_email}</arg>
+<arg>${email}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.978390" elapsed="0.000087"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_profession}</arg>
+<arg>${profession}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.978536" elapsed="0.000098"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.978691" elapsed="0.000149"/>
+</kw>
+<arg>heer</arg>
+<arg>heer@gmail.com</arg>
+<arg>student</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:03.915773" elapsed="0.063114"/>
+</kw>
+<doc>Register student and Validate</doc>
+<status status="PASS" start="2025-03-10T12:54:03.845603" elapsed="0.133475"/>
+</test>
+<test id="s1-t3" name="Register marks" line="20">
+<kw name="Register marks" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:03.980246" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:03.980156" elapsed="0.000210"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.980627" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.980478" elapsed="0.000170"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:03.980899" level="INFO">${data} = {'subjectmarks': '90', 'subject_id': '2', 'student_id': '2'}</msg>
+<var>${data}</var>
+<arg>subjectmarks=${subjectmarks}</arg>
+<arg>subject_id=${subject_id}</arg>
+<arg>student_id=${student_id}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.980724" elapsed="0.000322"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.028396" level="INFO">POST Request : url=http://127.0.0.1:8000/crudmarks/ 
+ path_url=/crudmarks/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '60'} 
+ body=b'{"subjectmarks": "90", "subject_id": "2", "student_id": "2"}' 
+ </msg>
+<msg time="2025-03-10T12:54:04.028493" level="INFO">POST Response : url=http://127.0.0.1:8000/crudmarks/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'GET, POST, PATCH, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '60', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"student_id":["Invalid pk \"2\" - object does not exist."]} 
+ </msg>
+<msg time="2025-03-10T12:54:04.028611" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>crudmarks/</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:03.981148" elapsed="0.047483"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Status Code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.028770" elapsed="0.000670"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Body: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.029630" elapsed="0.000540"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.030247" elapsed="0.000047"/>
+</return>
+<msg time="2025-03-10T12:54:04.030447" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>90</arg>
+<arg>2</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:03.979951" elapsed="0.050522"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.030976" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.030656" elapsed="0.000360"/>
+</kw>
+<doc>Register marks and Validate</doc>
+<status status="PASS" start="2025-03-10T12:54:03.979608" elapsed="0.051546"/>
+</test>
+<test id="s1-t4" name="Duplicate Student" line="27">
+<kw name="Register student" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.032287" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.032172" elapsed="0.000133"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.032454" level="INFO">${subject_list} = ['2']</msg>
+<var>${subject_list}</var>
+<arg>${subject_id}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.032366" elapsed="0.000104"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.032712" level="INFO">${data} = {'name': 'heer', 'email': 'heer@gmail.com', 'profession': 'student', 'subject_id': ['2']}</msg>
+<var>${data}</var>
+<arg>name=${name}</arg>
+<arg>email=${email}</arg>
+<arg>profession=${profession}</arg>
+<arg>subject_id=${subject_list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.032539" elapsed="0.000190"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Sending Data: ${data}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.032803" elapsed="0.000201"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.082579" level="INFO">POST Request : url=http://127.0.0.1:8000//createuser/ 
+ path_url=//createuser/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "heer", "email": "heer@gmail.com", "profession": "student", "subject_id": ["2"]}' 
+ </msg>
+<msg time="2025-03-10T12:54:04.082668" level="INFO">POST Response : url=http://127.0.0.1:8000//createuser/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'POST, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '50', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"email":["user with this email already exists."]} 
+ </msg>
+<msg time="2025-03-10T12:54:04.082820" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/createuser/</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.033090" elapsed="0.049785"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.083060" elapsed="0.000692"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.084515" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<arg>User creation failed!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.083927" elapsed="0.000655"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.084666" elapsed="0.000048"/>
+</return>
+<msg time="2025-03-10T12:54:04.084880" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>heer</arg>
+<arg>heer@gmail.com</arg>
+<arg>student</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:04.031968" elapsed="0.052960"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.085704" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.085192" elapsed="0.000558"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.086096" level="INFO">${error_list} = ['user with this email already exists.']</msg>
+<var>${error_list}</var>
+<arg>user with this email already exists.</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.085963" elapsed="0.000152"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.086440" level="INFO">${expected_error} = {'email': ['user with this email already exists.']}</msg>
+<var>${expected_error}</var>
+<arg>email=${error_list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.086286" elapsed="0.000170"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.087104" level="INFO">Argument types are:
+&lt;class 'dict'&gt;
+&lt;class 'robot.utils.dotdict.DotDict'&gt;</msg>
+<arg>${response.json()}</arg>
+<arg>${expected_error}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.086744" elapsed="0.000409"/>
+</kw>
+<doc>register the student again and check for the Duplicate</doc>
+<status status="PASS" start="2025-03-10T12:54:04.031562" elapsed="0.055761"/>
+</test>
+<test id="s1-t5" name="Duplicate subject" line="40">
+<kw name="Register subject" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.088361" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:04.088268" elapsed="0.000204"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.088654" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.088547" elapsed="0.000123"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.088842" level="INFO">${data} = {'subjectname': 'Hindi'}</msg>
+<var>${data}</var>
+<arg>subjectname=${subjectname}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.088732" elapsed="0.000124"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.133239" level="INFO">POST Request : url=http://127.0.0.1:8000/crudsubject/ 
+ path_url=/crudsubject/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '24'} 
+ body=b'{"subjectname": "Hindi"}' 
+ </msg>
+<msg time="2025-03-10T12:54:04.133313" level="INFO">POST Response : url=http://127.0.0.1:8000/crudsubject/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'GET, POST, PATCH, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '65', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"subjectname":["subject with this subjectname already exists."]} 
+ </msg>
+<msg time="2025-03-10T12:54:04.133408" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${forSubject}</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.088923" elapsed="0.044503"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Status Code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.133553" elapsed="0.000651"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response Body: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.134404" elapsed="0.000651"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.135159" elapsed="0.000083"/>
+</return>
+<msg time="2025-03-10T12:54:04.135449" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>Hindi</arg>
+<status status="PASS" start="2025-03-10T12:54:04.088095" elapsed="0.047380"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.136203" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.135795" elapsed="0.000457"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.136700" level="INFO">${error_list} = ['subject with this subjectname already exists.']</msg>
+<var>${error_list}</var>
+<arg>subject with this subjectname already exists.</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.136472" elapsed="0.000246"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.137054" level="INFO">${expected_error} = {'subjectname': ['subject with this subjectname already exists.']}</msg>
+<var>${expected_error}</var>
+<arg>subjectname=${error_list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.136886" elapsed="0.000186"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.137523" level="INFO">Argument types are:
+&lt;class 'dict'&gt;
+&lt;class 'robot.utils.dotdict.DotDict'&gt;</msg>
+<arg>${response.json()}</arg>
+<arg>${expected_error}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.137196" elapsed="0.000365"/>
+</kw>
+<doc>register the subject again and check for the Duplicate</doc>
+<status status="PASS" start="2025-03-10T12:54:04.087773" elapsed="0.049931"/>
+</test>
+<test id="s1-t6" name="Fetch subject" line="52">
+<kw name="Fetch subject" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.139016" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:04.138924" elapsed="0.000204"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.186653" level="INFO">GET Request : url=http://127.0.0.1:8000/crudsubject/ 
+ path_url=/crudsubject/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-03-10T12:54:04.186785" level="INFO">GET Response : url=http://127.0.0.1:8000/crudsubject/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'GET, POST, PATCH, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '259', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body=[{"id":1,"subjectname":"python"},{"id":2,"subjectname":"java"},{"id":3,"subjectname":"english"},{"id":4,"subjectname":"maths"},{"id":6,"subjectname":"physics"},{"id":7,"subjectname":"biology"},{"id":8,"subjectname":"chemistry"},{"id":9,"subjectname":"Hindi"}] 
+ </msg>
+<msg time="2025-03-10T12:54:04.186957" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>${forSubject}/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.139197" elapsed="0.047806"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.187266" elapsed="0.000409"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.187771" elapsed="0.000052"/>
+</return>
+<msg time="2025-03-10T12:54:04.188096" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2025-03-10T12:54:04.138735" elapsed="0.049385"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.188728" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.188346" elapsed="0.000427"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.188979" elapsed="0.000607"/>
+</kw>
+<doc>fetch all subject</doc>
+<status status="PASS" start="2025-03-10T12:54:04.138354" elapsed="0.051452"/>
+</test>
+<test id="s1-t7" name="Fetch student" line="58">
+<kw name="Fetch student" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.191978" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:04.191019" elapsed="0.001158"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.257021" level="INFO">GET Request : url=http://127.0.0.1:8000/getuser/3 (redirected) 
+ path_url=/getuser/3 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-03-10T12:54:04.257115" level="INFO">GET Response : url=http://127.0.0.1:8000/getuser/3/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'OPTIONS, GET', 'X-Frame-Options': 'DENY', 'Content-Length': '93', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"data":{"id":3,"name":"diya","email":"d@gmail.com","profession":"teacher","subject_id":[2]}} 
+ </msg>
+<msg time="2025-03-10T12:54:04.257260" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/getuser/${id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.192337" elapsed="0.064948"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.257366" elapsed="0.000057"/>
+</return>
+<msg time="2025-03-10T12:54:04.257578" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>3</arg>
+<status status="PASS" start="2025-03-10T12:54:04.190717" elapsed="0.066882"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.258366" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.257971" elapsed="0.000445"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.258673" elapsed="0.000566"/>
+</kw>
+<doc>fetch single user</doc>
+<status status="PASS" start="2025-03-10T12:54:04.190297" elapsed="0.069126"/>
+</test>
+<test id="s1-t8" name="Fetch all students" line="64">
+<kw name="Fetch all students" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.260324" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:04.260235" elapsed="0.000185"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.445359" level="INFO">GET Request : url=http://127.0.0.1:8000/getalluser/ 
+ path_url=/getalluser/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-03-10T12:54:04.445430" level="INFO">GET Response : url=http://127.0.0.1:8000/getalluser/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'OPTIONS, GET', 'X-Frame-Options': 'DENY', 'Content-Length': '713', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"data":[{"id":3,"name":"diya","email":"d@gmail.com","profession":"teacher","subject_id":[2]},{"id":4,"name":"priya","email":"p@gmail.com","profession":"student","subject_id":[3]},{"id":5,"name":"kiya","email":"k@gmail.com","profession":"student","subject_id":[3]},{"id":1,"name":"freya","email":"freya@gmail.com","profession":"teacher","subject_id":[1]},{"id":6,"name":"kiya","email":"k1@gmail.com","profession":"student","subject_id":[3]},{"id":7,"name":"kiya","email":"k2@gmail.com","profession":"student","subject_id":[3]},{"id":8,"name":"vaibhavi","email":"vaibhavi@gmail.com","profession":"student","subject_id":[3]},{"id":12,"name":"heer","email":"heer@gmail.com","profession":"student","subject_id":[2]}]} 
+ </msg>
+<msg time="2025-03-10T12:54:04.445542" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>getalluser/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.260498" elapsed="0.185068"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.445699" elapsed="0.000055"/>
+</return>
+<msg time="2025-03-10T12:54:04.445919" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2025-03-10T12:54:04.260062" elapsed="0.185881"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.446863" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.446351" elapsed="0.000559"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.447391" elapsed="0.001000"/>
+</kw>
+<doc>fetch all user</doc>
+<status status="PASS" start="2025-03-10T12:54:04.259778" elapsed="0.188819"/>
+</test>
+<test id="s1-t9" name="Update student" line="72">
+<kw name="Update student" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.449968" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.449852" elapsed="0.000136"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.450171" level="INFO">${subject_list} = ['2']</msg>
+<var>${subject_list}</var>
+<arg>${subject_id}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.450073" elapsed="0.000113"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.450514" level="INFO">${data} = {'name': 'heer', 'email': 'heer@gmail.com', 'profession': 'teacher', 'subject_id': ['2']}</msg>
+<var>${data}</var>
+<arg>name=${name}</arg>
+<arg>email=${email}</arg>
+<arg>profession=${profession}</arg>
+<arg>subject_id=${subject_list}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.450249" elapsed="0.000283"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Sending Data: ${data}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.450617" elapsed="0.000364"/>
+</kw>
+<kw name="PUT" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.514663" level="INFO">PUT Request : url=http://127.0.0.1:8000/updateusers/12/ 
+ path_url=/updateusers/12/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '89'} 
+ body=b'{"name": "heer", "email": "heer@gmail.com", "profession": "teacher", "subject_id": ["2"]}' 
+ </msg>
+<msg time="2025-03-10T12:54:04.514783" level="INFO">PUT Response : url=http://127.0.0.1:8000/updateusers/12/ 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'PUT, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '97', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body={"data":{"id":12,"name":"heer","email":"heer@gmail.com","profession":"teacher","subject_id":[2]}} 
+ </msg>
+<msg time="2025-03-10T12:54:04.514940" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}updateusers/${id}/</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a PUT request.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.451129" elapsed="0.063847"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>API Response: ${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.515157" elapsed="0.001023"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.516758" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<arg>User creation failed!</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.516349" elapsed="0.000452"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.516853" elapsed="0.000028"/>
+</return>
+<msg time="2025-03-10T12:54:04.516976" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>12</arg>
+<arg>heer</arg>
+<arg>heer@gmail.com</arg>
+<arg>teacher</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:04.449617" elapsed="0.067374"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.517576" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.517181" elapsed="0.000437"/>
+</kw>
+<kw name="Validate Student" owner="keywords">
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2025-03-10T12:54:04.518422" level="INFO">Looking for configuration file: 'resources\db.cfg'</msg>
+<msg time="2025-03-10T12:54:04.518500" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2025-03-10T12:54:04.518604" level="INFO">Connect to DB using : psycopg2.connect(database='student', user='postgres', password=***, host='localhost', port=5432)</msg>
+<arg>psycopg2</arg>
+<arg>${DBName}</arg>
+<arg>${DBUser}</arg>
+<arg>${DBPass}</arg>
+<arg>${DBHost}</arg>
+<arg>${DBPort}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.518204" elapsed="0.041650"/>
+</kw>
+<kw name="Query" owner="DatabaseLibrary">
+<msg time="2025-03-10T12:54:04.560180" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT * FROM helloapi_user WHERE email='heer@gmail.com'&lt;/code&gt;</msg>
+<msg time="2025-03-10T12:54:04.562962" level="INFO">Commit the transaction</msg>
+<msg time="2025-03-10T12:54:04.563111" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;name&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;email&lt;/th&gt;&lt;th scope="col" style="background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;profession&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;12&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;heer&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;heer@gmail.com&lt;/td&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;teacher&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg time="2025-03-10T12:54:04.563210" level="INFO">${query_result} = [(12, 'heer', 'heer@gmail.com', 'teacher')]</msg>
+<var>${query_result}</var>
+<arg>SELECT * FROM helloapi_user WHERE email='${email}'</arg>
+<doc>Runs a query with the ``select_statement`` and returns the result as list of rows.
+The type of row values depends on the database module -
+usually they are tuples or tuple-like objects.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.560013" elapsed="0.003214"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${query_result} == []</arg>
+<arg>Fail</arg>
+<arg>No student record found in the database.</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.563342" elapsed="0.000150"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Query Result: ${query_result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.563561" elapsed="0.000496"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.564773" level="INFO">${db_id} = 12</msg>
+<msg time="2025-03-10T12:54:04.564801" level="INFO">${db_name} = heer</msg>
+<msg time="2025-03-10T12:54:04.564823" level="INFO">${db_email} = heer@gmail.com</msg>
+<msg time="2025-03-10T12:54:04.564844" level="INFO">${db_profession} = teacher</msg>
+<var>${db_id}</var>
+<var>${db_name}</var>
+<var>${db_email}</var>
+<var>${db_profession}</var>
+<arg>${query_result[0]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.564340" elapsed="0.000516"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.565124" level="INFO">Length is 1.</msg>
+<arg>${query_result}</arg>
+<arg>Student registration failed, no data in the database.</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.565019" elapsed="0.000131"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_name}</arg>
+<arg>${name}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.565213" elapsed="0.000096"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_email}</arg>
+<arg>${email}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.565364" elapsed="0.000086"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${db_profession}</arg>
+<arg>${profession}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.565503" elapsed="0.000085"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.565642" elapsed="0.000154"/>
+</kw>
+<arg>heer</arg>
+<arg>heer@gmail.com</arg>
+<arg>teacher</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-10T12:54:04.517900" elapsed="0.047944"/>
+</kw>
+<doc>update student and Validate</doc>
+<status status="PASS" start="2025-03-10T12:54:04.449255" elapsed="0.116854"/>
+</test>
+<test id="s1-t10" name="Delete student" line="77">
+<kw name="Delete student" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.567127" level="INFO">Creating Session using : alias=mysession, url=http://127.0.0.1:8000/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>mysession</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-10T12:54:04.567036" elapsed="0.000202"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-03-10T12:54:04.733010" level="INFO">DELETE Request : url=http://127.0.0.1:8000/deleteuser/12 
+ path_url=/deleteuser/12 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-03-10T12:54:04.733143" level="INFO">DELETE Response : url=http://127.0.0.1:8000/deleteuser/12 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 10 Mar 2025 07:24:04 GMT', 'Server': 'WSGIServer/0.2 CPython/3.13.1', 'Content-Type': 'application/json', 'Vary': 'Accept, Cookie', 'Allow': 'OPTIONS, DELETE', 'X-Frame-Options': 'DENY', 'Content-Length': '27', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'} 
+ body="user deleted successfully" 
+ </msg>
+<msg time="2025-03-10T12:54:04.733277" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>deleteuser/${id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.567327" elapsed="0.165972"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-03-10T12:54:04.733392" elapsed="0.000053"/>
+</return>
+<msg time="2025-03-10T12:54:04.733554" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>12</arg>
+<status status="PASS" start="2025-03-10T12:54:04.566832" elapsed="0.166763"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-03-10T12:54:04.734426" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.733905" elapsed="0.000576"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<arg>user deleted successfully</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.734768" elapsed="0.000463"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-10T12:54:04.735471" elapsed="0.000553"/>
+</kw>
+<doc>delete user by id</doc>
+<status status="PASS" start="2025-03-10T12:54:04.566536" elapsed="0.169749"/>
+</test>
+<status status="PASS" start="2025-03-10T12:54:03.466588" elapsed="1.270555"/>
+</suite>
+<statistics>
+<total>
+<stat pass="10" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="testForGet" id="s1" pass="10" fail="0" skip="0">testForGet</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-03-10T12:54:03.460405" level="ERROR">Error in file 'C:\Users\Vaibhavi\OneDrive\Desktop\my projects\dev\internship\firsttask\robotrequests\tests\testForGet.robot' on line 6: Non-existing setting '${'.</msg>
+<msg time="2025-03-10T12:54:03.770359" level="ERROR">Error in file 'C:\Users\Vaibhavi\OneDrive\Desktop\my projects\dev\internship\firsttask\robotrequests\resources\keywords.robot' on line 2: Setting 'Suite Setup' is not allowed in resource file.</msg>
+<msg time="2025-03-10T12:54:03.771109" level="ERROR">Error in file 'C:\Users\Vaibhavi\OneDrive\Desktop\my projects\dev\internship\firsttask\robotrequests\resources\keywords.robot' on line 3: Setting 'Suite Teardown' is not allowed in resource file.</msg>
+</errors>
+</robot>
